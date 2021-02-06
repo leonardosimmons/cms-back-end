@@ -1,0 +1,6 @@
+# folders
+/testing
+
+# files
+*.txt
+config.php
