@@ -6,8 +6,18 @@ require('includes/functions.php');
 class Database
 {
   /*  -----------------  INITIALIZATION  -----------------  */
-  private $conn;
+  public static $connection;
+  public bool $connected = false;
   private string $hn, $un, $pw, $db;
+
+  public function __construct()
+  {
+    if (self::$connection = $this->connect()) {
+      return $this->connected = true;
+    }
+
+    return false;
+  }
 
   /*  ------------------  CONNECTION  ------------------  */
 
@@ -55,20 +65,19 @@ class Database
    */
   public function connect()
   {
-    $this->conn = null;
+    $conn = null;
     $this->setLoginInfo();
 
     try {
-      $this->conn = new PDO('mysql:host=' . $this->hn . ';dbname=' . $this->db, $this->un , $this->pw);
-      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $conn = new PDO('mysql:host=' . $this->hn . ';dbname=' . $this->db, $this->un , $this->pw);
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     catch (PDOException $err){
       echo 'Connection Error: ' . $err->getMessage();
     }
 
-    return $this->conn;
+    return $conn;
   }
 };
-
 
 ?>
