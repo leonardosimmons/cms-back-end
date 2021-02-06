@@ -1,8 +1,5 @@
 <?php
 
-require('includes/config.php');
-require('includes/functions.php');
-
 class Database
 {
   /*  -----------------  INITIALIZATION  -----------------  */
@@ -24,7 +21,7 @@ class Database
   /**
    * * Sets database login information
    */
-  protected function setLoginInfo()
+  private function setLoginInfo()
   {
     $fh = fopen(LOGIN_INFO, 'r');
     $line = fread($fh, 50);
