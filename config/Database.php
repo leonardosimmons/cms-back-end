@@ -1,7 +1,7 @@
 <?php
 
-require('./includes/config.php');
-require('./includes/functions.php');
+require('includes/config.php');
+require('includes/functions.php');
 
 class Database
 {
@@ -56,6 +56,7 @@ class Database
   public function connect()
   {
     $this->conn = null;
+    $this->setLoginInfo();
 
     try {
       $this->conn = new PDO('mysql:host=' . $this->hn . ';dbname=' . $this->db, $this->un , $this->pw);
