@@ -26,10 +26,10 @@ class Database
     $fh = fopen(LOGIN_INFO, 'r');
     $line = fread($fh, 50);
     fclose($fh);
-    $temp = explode("\n", $line);
+    $words = explode("\n", $line);
 
     $i = 1;
-    foreach ($temp as $word) {
+    foreach ($words as $word) {
       switch($i)
       {
         case 1:
@@ -60,7 +60,7 @@ class Database
   /**
    * * Connects to database
    */
-  public function connect()
+  private function connect()
   {
     $conn = null;
     $this->setLoginInfo();

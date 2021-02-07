@@ -1,11 +1,7 @@
 <?php
 
-define('ROOT_DIR', getcwd());
-
-require_once (ROOT_DIR.'/../config/includes/config.php');
-require_once (ROOT_DIR.'/../config/includes/functions.php');
-require_once (ROOT_DIR.'/../config/controllers/DatabaseController.php');
-require_once (ROOT_DIR.'/../config/controllers/ValidationController.php');
+require_once (ROOT_PATH.'config/controllers/DatabaseController.php');
+require_once (ROOT_PATH.'config/controllers/ValidationController.php');
 
 class ServerController
 {
