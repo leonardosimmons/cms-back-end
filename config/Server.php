@@ -14,7 +14,7 @@ class Server {
   {
     self::$control = new ServerController();
 
-    if (Server::$control->connected && Server::$control->database->connected) {
+    if (self::$control->connected && self::$control->database->connected) {
       self::$connected = true; //! TEMP -> will replace with user auth login check
       return true;
     }
@@ -31,10 +31,10 @@ class Server {
   {
     if (self::$connected) {
       ValidationController::$validated = false;
-      Server::$control->database->connected = false;
-      Server::$control->connected = false;
-      Database::$connection = null;
+      self::$control->database->connected = false;
+      self::$control->connected = false;
       self::$connected = false;
+      Database::$connection = null;
       return true;
     }
 
@@ -45,7 +45,7 @@ class Server {
   /*  ----------------------  JAVASCRIPT  ----------------------  */
 
   /**
-   * * Console logs output
+   * * Console logs output [ JS ]
    */
   public static function consoleLog($output, $with_script_tags = true)
   {
@@ -58,7 +58,7 @@ class Server {
   }
 
   /**
-   * * Alerts output
+   * * Alerts output [ JS ]
    */
   public static function alert($output, $with_script_tags = true)
   {

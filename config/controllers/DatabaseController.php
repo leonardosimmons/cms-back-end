@@ -5,7 +5,7 @@ class Database
   /*  -----------------  INITIALIZATION  -----------------  */
   public static $connection;
   public bool $connected = false;
-  private string $hn, $un, $pw, $db;
+  private $login = Array();
 
   public function __construct()
   {
@@ -33,16 +33,16 @@ class Database
       switch($i)
       {
         case 1:
-          $this->hn = onlyAlpha(preg_replace("/\s+/", "", $word));
+          $this->login['hostname'] = onlyAlpha(preg_replace("/\s+/", "", $word));
           break;
         case 2:
-          $this->un = onlyAlpha(preg_replace("/\s+/", "", $word));
+          $this->login['username'] = onlyAlpha(preg_replace("/\s+/", "", $word));
           break;
         case 3:
-          $this->pw = onlyAlpha(preg_replace("/\s+/", "", $word));
+          $this->login['password'] = onlyAlpha(preg_replace("/\s+/", "", $word));
           break;
         case 4:
-          $this->db = onlyAlpha(preg_replace("/\s+/", "", $word));
+          $this->login['database'] = onlyAlpha(preg_replace("/\s+/", "", $word));
           break;
         default:
           break;
@@ -50,7 +50,7 @@ class Database
       ++$i;
     }
     
-    if ($this->db) {
+    if ($this->login['database']) {
       return true;
     } 
 
@@ -66,7 +66,7 @@ class Database
     $this->setLoginInfo();
 
     try {
-      $conn = new PDO('mysql:host=' . $this->hn . ';dbname=' . $this->db, $this->un , $this->pw);
+      $conn = new PDO('mysql:host=' . $this->login['hostname'] . ';dbname=' . $this->login['database'], $this->login['username'], $this->login['password']);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     catch (PDOException $err){
