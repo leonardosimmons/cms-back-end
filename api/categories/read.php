@@ -1,10 +1,10 @@
 <?php
 
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json'); 
-
 include '../../config/Server.php';
 include '../../models/categories/Categories.php';
+
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json'); 
 
 new Server();
 $categories = new Categories(Database::$connection);
@@ -12,7 +12,7 @@ $categories = new Categories(Database::$connection);
 $category = $categories->read();
 $count = $category->rowCount();
 
-if (count > 0)
+if ($count > 0)
 {
   $c_arr = array();
   $c_arr['data'] = array();
@@ -30,6 +30,7 @@ if (count > 0)
 
   Server::end();
 
+  //echo $c_arr['data'];
   echo json_encode($c_arr['data']);
 
 } else {
@@ -40,4 +41,7 @@ if (count > 0)
     );
 }
 
+  
+Server::end();
+  
 ?>
