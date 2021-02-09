@@ -30,7 +30,6 @@ if ($count > 0)
 
   Server::end();
 
-  //echo $c_arr['data'];
   echo json_encode($c_arr['data']);
 
 } else {
