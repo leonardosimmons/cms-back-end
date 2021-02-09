@@ -26,7 +26,7 @@ if ($count > 0) {
      'author' => $author,
      'date' => $date,
      'tags' => $tags,
-     'comments' => $comment_count,
+     'commentCount' => $comment_count,
      'status' => $status,
      'content' => $content,
      'image' => $image,
