@@ -6,10 +6,12 @@ class Posts
   public $table = POSTS_DB_TABLE;
 
   public $id;
+  public $type;
   public $category_id;
   public $title;
   public $author;
   public $date;
+  public $searchTag;
   public $tags;
   public $comment_count;
   public $status;
@@ -21,6 +23,7 @@ class Posts
     $this->conn = $db;
   }
 
+  /** Returns all of the posts within the database */
   public function read()
   {
     $query = 'SELECT * FROM ' . $this->table;
@@ -29,6 +32,21 @@ class Posts
 
     return $stmt;
   }
+
+  /**
+   * @param $search
+   * @return Posts
+   */
+  public function search()
+  {
+    $query = 'SELECT * FROM ' . $this->table . ' WHERE tags LIKE ?';
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(1, $this->searchTag);
+    $stmt->execute();
+
+    return $stmt;
+  }
+
 };
 
-?>
+
