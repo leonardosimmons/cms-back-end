@@ -9,7 +9,7 @@
   $server = new Server();
   $posts = new Posts(Database::$connection);
 
-  $posts->searchTag = isset($_GET['tag']) ? $_GET['tag'] : die();
+  $posts->searchTag = sanitizeString((isset($_GET['tag']) ? $_GET['tag'] : die()), 6);
 
   $post = $posts->search();
   $count = $post->rowCount();
